@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TSK.Data\TSK.Data.csproj" />
+    <ProjectReference Include="..\TSK.DTO\TSK.DTO.csproj" />
+    <ProjectReference Include="..\TSK.Exception\TSK.ExceptionHandler.csproj" />
+    <ProjectReference Include="..\TSK.Model\TSK.Model.csproj" />
+    <ProjectReference Include="..\TSK.Security\TSK.Security.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -2,8 +2,12 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
 using System.Text;
+using TSK.IoC;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddInfraDependencies(builder.Configuration);
 
 builder.Services.AddCors(options =>
 {
@@ -28,9 +32,9 @@ builder.Services.AddAuthentication(options =>
         ValidateAudience = true,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
-        ValidIssuer = "https://localhost:7029",
-        ValidAudience = "https://localhost:7029",
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@123"))
+        ValidIssuer = builder.Configuration.GetSection("TokenConfiguration:ValidIssuer").Value,
+        ValidAudience = builder.Configuration.GetSection("TokenConfiguration:ValidAudience").Value,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetSection("TokenConfiguration:Key").Value))
     };
 });
 
